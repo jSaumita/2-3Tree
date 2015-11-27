@@ -17,13 +17,13 @@ type T23 struct {
 func newT23() *T23 {
 	return new(T23)
 }
-func (t *T23) t23Insert(x int) bool {
+func (t *T23) Insert(x int) bool {
 	fmt.Println("insertar", x)
 	if t.root == nil {
 		t.root = &nodo23{smallData: x}
 		return true
 	}
-	if t.search(x) {
+	if t.Search(x) {
 		return false
 	}
 	return t.searchInsert(t.root, x)
@@ -47,7 +47,7 @@ func (t *T23) searchInsert(nodo *nodo23, x int) bool {
 	}
 	return true
 }
-func (t *T23) search(x int) bool {
+func (t *T23) Search(x int) bool {
 	tmp := t.root
 	for tmp != nil {
 		if tmp.smallData == x || tmp.bigData == x {
