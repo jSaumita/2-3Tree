@@ -1,3 +1,7 @@
+//Arbol 2-3 en GO
+// Noviembre 2015 , Javier Sauma
+//Basado en  2_3_tree/ttTree.cpp /ajaxon
+
 package main
 
 import (
