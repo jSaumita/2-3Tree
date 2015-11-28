@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
-	"github.com/jSaumita/2-3Tree"
+	"github.com/jsaumap/2-3Tree"
 
-	st "github.com/jSaumita/2-3Tree/2-3Tree.go"
+	st "github.com/jsaumap/2-3Tree/2-3Tree.go"
 )
 
 var n int
