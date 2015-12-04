@@ -1,12 +1,11 @@
-//Arbol 2-3 en GO
-// Noviembre 2015 , Javier Sauma
-//Basado en  2_3_tree/ttTree.cpp /ajaxon
-
 package main
 
 import (
+	"flag"
 	"fmt"
+	"math/rand"
 	"sort"
+	"time"
 )
 
 type nodo23 struct {
@@ -21,7 +20,7 @@ type T23 struct {
 func newT23() *T23 {
 	return new(T23)
 }
-func (t *T23) Insert(x int) bool {
+func (t *T23) t23Insert(x int) bool {
 	fmt.Println("insertar", x)
 	if t.root == nil {
 		t.root = &nodo23{smallData: x}
@@ -175,6 +174,12 @@ func (t *T23) tPrint() {
 	fmt.Println()
 
 }
+
+var n int
+
+func init() {
+	flag.IntVar(&n, "n", 10000, "Number of elements to insert")
+}
 func (t *T23) inorderTraverse(nodo *nodo23) {
 	if nodo.isLeaf() {
 		if nodo.isThreeTree() {
@@ -199,28 +204,58 @@ func (t *T23) inorderTraverse(nodo *nodo23) {
 	}
 }
 func main() {
-	mytree := newT23()
-	// mytree.t23Insert(37)
-	// mytree.t23Insert(50)
-	// mytree.t23Insert(30)
-	// mytree.t23Insert(39)
-	// mytree.t23Insert(70)
-	// mytree.t23Insert(90)
-	// mytree.t23Insert(10)
-	// mytree.t23Insert(36)
-	// mytree.t23Insert(20)
-	// mytree.t23Insert(38)
-	// mytree.t23Insert(40)
-	// mytree.t23Insert(60)
-	// mytree.t23Insert(80)
-	// mytree.t23Insert(100)
-	// mytree.t23Insert(35)
-	// mytree.t23Insert(34)
-	// mytree.t23Insert(33)
-	// mytree.t23Insert(32)
-	for i := 1; i < 11; i++ {
-		mytree.t23Insert(i * 10)
+	// mytree := newT23()
+	// // mytree.t23Insert(37)
+	// // mytree.t23Insert(50)
+	// // mytree.t23Insert(30)
+	// // mytree.t23Insert(39)
+	// // mytree.t23Insert(70)
+	// // mytree.t23Insert(90)
+	// // mytree.t23Insert(10)
+	// // mytree.t23Insert(36)
+	// // mytree.t23Insert(20)
+	// // mytree.t23Insert(38)
+	// // mytree.t23Insert(40)
+	// // mytree.t23Insert(60)
+	// // mytree.t23Insert(80)
+	// // mytree.t23Insert(100)
+	// // mytree.t23Insert(35)
+	// // mytree.t23Insert(34)
+	// // mytree.t23Insert(33)
+	// // mytree.t23Insert(32)
+	// for i := 1; i < 11; i++ {
+	// 	mytree.t23Insert(i * 10)
+	// }
+	// mytree.tPrint()
+	flag.Parse()
+	elements := make([]int, n)
+	for i := range elements {
+		elements[i] = rand.Int()
 	}
-	mytree.tPrint()
+
+	ini := time.Now()
+	var t *T23
+	t = newT23()
+	d := time.Now().Sub(ini)
+	fmt.Printf("Tree created [%v]\n", d)
+
+	fmt.Printf("Inserting data")
+	ini = time.Now()
+	for _, v := range elements {
+		t.t23Insert(v)
+	}
+	d = time.Now().Sub(ini)
+	fmt.Printf(" [%v]\n", d)
+
+	fmt.Printf("Searching data")
+	ini = time.Now()
+	for _, v := range elements {
+		if !t.Search(v) {
+			fmt.Printf(" ... FAILED!\n")
+			fmt.Printf("%d wasn't found!!\n", v)
+		}
+	}
+	d = time.Now().Sub(ini)
+	fmt.Printf(" [%v]\n", d)
 
 }
